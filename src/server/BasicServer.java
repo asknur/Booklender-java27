@@ -72,6 +72,14 @@ public abstract class BasicServer {
         getRoutes().put("GET " + route, handler);
     }
 
+    protected final void loginGet(String route, RouteHandler handler) {
+        getRoutes().put("GET " + route, handler);
+    }
+
+    protected final void profileGet(String route, RouteHandler handler) {
+        getRoutes().put("GET " + route, handler);
+    }
+
     protected final void registerFileHandler(String fileExt, ContentType type) {
         registerGet(fileExt, exchange -> sendFile(exchange, makeFilePath(exchange), type));
     }
