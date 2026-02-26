@@ -15,14 +15,13 @@ import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Homework45Server extends Lesson44Server {
+    private User currentUser = null;
+    private Map<String, User> users = new HashMap<>();
 
     public Homework45Server(String host, int port) throws IOException {
         super(host, port);
@@ -40,8 +39,43 @@ public class Homework45Server extends Lesson44Server {
         sendFile(exchange, path, ContentType.TEXT_HTML);
     }
 
-    private void registerPost(String route, RouteHandler handler) {
-        getRoutes().put("POST " + route, handler);
+    private void registerPost(HttpExchange exchange) {
+        String raw = getBody(exchange);
+        Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
+        String email = parsed.getOrDefault("email", "").trim();
+        String fullName = parsed.getOrDefault("name", "").trim();
+        String password = parsed.getOrDefault("password", "").trim();
+        List<User> users = UserStorage.readUsers();
+
+        boolean exists = users.stream().anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
+        String response = "";
+        if (fullName.isBlank() || email.isBlank() || password.isBlank()) {
+
+            response = """
+                    <h2>Регистрация не удалась</h2>
+                    <p>Заполните все поля</p>
+                    <a href="/register">Назад</a>
+                    """;
+        } else if (exists) {
+            response = """
+                    <h2>Регистрация не удалась</h2>
+                    <p>Пользователь уже существует</p>
+                    <a href="/register">Попробовать снова</a>
+                    """;
+        } else {
+            users.add(new User(fullName, email, password));
+            UserStorage.writeUsers(users);
+            redirect303(exchange, "/login");
+        }
+
+        try {
+            sendByteData(exchange,
+                    ResponseCodes.OK,
+                    ContentType.TEXT_HTML,
+                    response.getBytes(StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loginGet(HttpExchange exchange) {
@@ -49,8 +83,21 @@ public class Homework45Server extends Lesson44Server {
         sendFile(exchange, path, ContentType.TEXT_HTML);
     }
 
-    private void loginPost(String route, RouteHandler handler) {
-        getRoutes().put("POST " + route, handler);
+    private void loginPost(HttpExchange exchange) {
+        Map<String, String> parsed = Utils.parseUrlEncoded(getBody(exchange), "&");
+
+        String email = parsed.getOrDefault("email", "");
+        String password = parsed.getOrDefault("password", "");
+
+        List<User> users = UserStorage.readUsers();
+        Optional<User> matched = users.stream().filter(u -> u.getEmail().equals(email) && u.getPassword().equals(password))
+                .findFirst();
+        if (matched.isPresent()) {
+            currentUser = matched.get();
+            redirect303(exchange, "/profile");
+        } else {
+            redirect303(exchange, "/login");
+        }
     }
 
     private void profileGet(HttpExchange exchange) {
@@ -59,48 +106,10 @@ public class Homework45Server extends Lesson44Server {
     }
 
 
-
-
-
-    private void loginPost(HttpExchange exchange) {
-        String cType = getContentType(exchange);
-        String raw = getBody(exchange);
-        Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
-
-        String fmt = "<p>Необработанные данные: <b>%s</b></p>"
-                + "<p>Content-type: <b>%s</b></p>"
-                + "<p>После обработки: <b>%s</b></p>";
-        String data = String.format(fmt, raw, cType, parsed);
-        try {
-            sendByteData(exchange, ResponseCodes.OK,
-                    ContentType.TEXT_HTML, data.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void registerPost(HttpExchange exchange) {
-        String cType = getContentType(exchange);
-        String raw = getBody(exchange);
-        Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
-
-        String fmt = "<p>Необработанные данные: <b>%s</b></p>"
-                + "<p>Content-type: <b>%s</b></p>"
-                + "<p>После обработки: <b>%s</b></p>";
-        String data = String.format(fmt, raw, cType, parsed);
-        try {
-            sendByteData(exchange, ResponseCodes.OK,
-                    ContentType.TEXT_HTML, data.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static String getContentType(HttpExchange exchange) {
         return exchange.getRequestHeaders()
                 .getOrDefault("Content-Type", List.of(""))
                 .get(0);
-
     }
 
     protected String getBody(HttpExchange exchange) {
