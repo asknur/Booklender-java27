@@ -100,8 +100,15 @@ public class Homework45Server extends Lesson44Server {
     }
 
     private void profileGet(HttpExchange exchange) {
-        Path path = makeFilePath("profile.html");
-        sendFile(exchange, path, ContentType.TEXT_HTML);
+        Map<String, Object> model = new HashMap<>();
+        if (currentUser != null) {
+            model.put("email", currentUser.getEmail());
+            model.put("name", currentUser.getName());
+        } else {
+            model.put("email", "анонимный@mail.com");
+            model.put("name", "Некий пользователь");
+        }
+        renderTemplate (exchange, "profile.html", model);
     }
 
 
