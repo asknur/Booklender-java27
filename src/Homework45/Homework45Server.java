@@ -85,13 +85,12 @@ public class Homework45Server extends Lesson44Server {
 
     private void loginPost(HttpExchange exchange) {
         Map<String, String> parsed = Utils.parseUrlEncoded(getBody(exchange), "&");
-
         String email = parsed.getOrDefault("email", "");
         String password = parsed.getOrDefault("password", "");
 
         List<User> users = UserStorage.readUsers();
-        Optional<User> matched = users.stream().filter(u -> u.getEmail().equals(email) && u.getPassword().equals(password))
-                .findFirst();
+        Optional<User> matched = users.stream().filter(u -> u.getEmail().equals(email) && u.getPassword().equals(password)).findFirst();
+
         if (matched.isPresent()) {
             currentUser = matched.get();
             redirect303(exchange, "/profile");
@@ -101,8 +100,15 @@ public class Homework45Server extends Lesson44Server {
     }
 
     private void profileGet(HttpExchange exchange) {
-        Path path = makeFilePath("profile.html");
-        sendFile(exchange, path, ContentType.TEXT_HTML);
+        Map<String, Object> model = new HashMap<>();
+        if (currentUser != null) {
+            model.put("email", currentUser.getEmail());
+            model.put("name", currentUser.getName());
+        } else {
+            model.put("email", "анонимный@mail.com");
+            model.put("name", "Некий пользователь");
+        }
+        renderTemplate (exchange, "profile.html", model);
     }
 
 
