@@ -1,13 +1,14 @@
 package Homework44;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class BookHandler {
-    public static Map<String, Object> handleBooks() {
-        List<Book> books = List.of(
-                new Book("1", "Белый пароход", "Чингиз Айтматов", true, "emp1",
+
+    public static List<Book> books = new ArrayList<>(List.of(
+            new Book("1", "Белый пароход", "Чингиз Айтматов", true, "emp1",
                         "Повесть о мальчике и его деде-оленеводе, живущих на берегу озера Иссык-Куль.",
                         "https://ru-images.kinorium.com/movie/1080/141525.jpg?1627126817"),
 
@@ -65,25 +66,74 @@ public class BookHandler {
 
                 new Book("15", "Сто лет одиночества", "Габриэль Гарсиа Маркес", false, null,
                         "Сага о семье Буэндиа в вымышленном городе Макондо.",
-                        "https://vknige.net/wp-content/uploads/2021/02/4292.jpg")
-        );
+                        "https://vknige.net/wp-content/uploads/2021/02/4292.jpg")));
 
+
+    public static Map<String, Object> handleBooks() {
         Map<String, Object> model = new HashMap<>();
         model.put("books", books);
         return model;
     }
 
     public static Map<String, Object> handleOneBook(String id) {
-        // Здесь можно реализовать поиск книги по ID из общего списка
-        // Для примера создаем новую книгу
-        Book book = new Book("16", "Чистый код", "Роберт Мартин", true, "emp1",
-                "Руководство по написанию читаемого и поддерживаемого кода.",
-                "https://imo10.labirint.ru/books/642466/cover.jpg/242-0"
-        );
-
+        Book book = findBookById(id);
         Map<String, Object> model = new HashMap<>();
         model.put("book", book);
         return model;
+
     }
+
+    public static Book findBookById(String id) {
+        for (Book book : books) {
+            if (book.getId().equals(id)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public static boolean takeBook(String bookId, String employeeId) {
+        Book book = findBookById(bookId);
+        if (book == null){
+            System.out.println("There is no book");
+        } else if (book.isTaken()) {
+            System.out.println("The book is already taken");
+        }
+
+        Employee employee = EmployeeHandler.findEmployeeById(employeeId);
+        if (employee == null) {
+            System.out.println("There is no employee");;
+        } else if (employee.getCurrentBooks().size() >= 2) {
+            System.out.println("Can't take more than 2 books");
+        }
+
+        book.setTaken(true);
+        book.setIsTakenBy(employeeId);
+        employee.getCurrentBooks().add(bookId);
+        return true;
+    }
+
+    public static boolean returnBook(String bookId, String employeeId) {
+        Book book = findBookById(bookId);
+        if (book == null){
+            System.out.println("There is no book");
+        }
+
+        Employee employee = EmployeeHandler.findEmployeeById(employeeId);
+        if (employee == null) {
+            System.out.println("There is no employee");;
+        }
+
+        book.setTaken(true);
+        book.setIsTakenBy(employeeId);
+        employee.getCurrentBooks().remove(bookId);
+        employee.getHistoryBooks().add(bookId);
+        return true;
+    }
+
+    public static List<Book> getAllBooks() {
+        return books;
+    }
+
 
 }
