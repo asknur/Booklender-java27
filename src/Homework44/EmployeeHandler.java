@@ -1,39 +1,43 @@
 package Homework44;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class EmployeeHandler {
-    private static final List<Book> ALL_BOOKS = List.of(
-            new Book("1", "Белый пароход", "Чингиз Торекулович Айтматов", true, "emp1",
-                    "Повесть о мальчике и его деде, живущих на берегу озера Иссык-Куль.",
-                    "/images/belyj-parohod.jpg"),
-            new Book("2", "Java для начинающих", "Г. Шилдт", true, "emp1",
-                    "Классическое руководство по программированию на Java для новичков.",
-                    "/images/java-dlya-nachinayushchih.jpg"),
-            new Book("3", "Приключение Тома Сойера", "Марк Твен", false, null,
-                    "Захватывающие приключения мальчика Тома и его друзей в небольшом городке.",
-                    "/images/tom-sawyer.jpg"));
+    private static List<Employee> employees = new ArrayList<>(List.of(
+            new Employee("emp1", "Steve",
+                    new ArrayList<>(List.of("1", "2")),
+                    new ArrayList<>(List.of("3")))
+    ));
 
-
+    public static Employee findEmployeeById(String id) {
+        for (Employee emp : employees) {
+            if (emp.getId().equals(id)) {
+                return emp;
+            }
+        }
+        return null;
+    }
 
     public static Map<String, Object> handleEmployee(String id) {
-        Employee emp = new Employee("emp1", "Steve", List.of("1", "2"), List.of("3"));
+        Employee emp = findEmployeeById(id);
+        if (emp == null) return null;
 
-        List<Book> currentBooks = ALL_BOOKS.stream()
+        List<Book> currentBooks = BookHandler.getAllBooks().stream()
                 .filter(b -> emp.getCurrentBooks().contains(b.getId()))
-                .collect(Collectors.toList());
-
-        List<Book> historyBooks = ALL_BOOKS.stream()
+                .toList();
+        List<Book> historyBooks = BookHandler.getAllBooks().stream()
                 .filter(b -> emp.getHistoryBooks().contains(b.getId()))
-                .collect(Collectors.toList());
+                .toList();
 
         Map<String, Object> model = new HashMap<>();
         model.put("employee", emp);
         model.put("currentBooks", currentBooks);
         model.put("historyBooks", historyBooks);
+
         return model;
     }
 }

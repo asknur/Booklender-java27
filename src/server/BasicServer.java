@@ -1,5 +1,6 @@
 package server;
 
+import Homework46.Cookie;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
@@ -8,6 +9,7 @@ import java.net.InetSocketAddress;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class BasicServer {
@@ -134,6 +136,16 @@ public abstract class BasicServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    protected String getCookies(HttpExchange exchange) {
+        return exchange.getRequestHeaders()
+                .getOrDefault("Cookie", List.of(""))
+                .get(0);
+    }
+
+    protected void setCookie(HttpExchange exchange, Cookie cookie) {
+        exchange.getResponseHeaders().add("Set-Cookie", cookie.toString());
     }
 
     private void handleIncomingServerRequests(HttpExchange exchange) {

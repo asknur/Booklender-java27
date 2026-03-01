@@ -1,5 +1,6 @@
 package Homework45;
 
+import Homework46.Cookie;
 import com.sun.net.httpserver.HttpExchange;
 import lesson44.Lesson44Server;
 import server.ContentType;
@@ -20,8 +21,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Homework45Server extends Lesson44Server {
-    private User currentUser = null;
-    private Map<String, User> users = new HashMap<>();
+    private User currentUser;
+    private Map<String, User> sessions = new HashMap<>();
 
     public Homework45Server(String host, int port) throws IOException {
         super(host, port);
@@ -50,7 +51,6 @@ public class Homework45Server extends Lesson44Server {
         boolean exists = users.stream().anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
         String response = "";
         if (fullName.isBlank() || email.isBlank() || password.isBlank()) {
-
             response = """
                     <h2>Регистрация не удалась</h2>
                     <p>Заполните все поля</p>
@@ -66,6 +66,7 @@ public class Homework45Server extends Lesson44Server {
             users.add(new User(fullName, email, password));
             UserStorage.writeUsers(users);
             redirect303(exchange, "/login");
+            return;
         }
 
         try {
@@ -84,15 +85,22 @@ public class Homework45Server extends Lesson44Server {
     }
 
     private void loginPost(HttpExchange exchange) {
-        Map<String, String> parsed = Utils.parseUrlEncoded(getBody(exchange), "&");
-        String email = parsed.getOrDefault("email", "");
-        String password = parsed.getOrDefault("password", "");
+        String raw = getBody(exchange);
+        Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
+        String email = parsed.getOrDefault("email", "").trim();
+        String password = parsed.getOrDefault("password", "").trim();
 
         List<User> users = UserStorage.readUsers();
-        Optional<User> matched = users.stream().filter(u -> u.getEmail().equals(email) && u.getPassword().equals(password)).findFirst();
+        Optional<User> matched = users.stream().filter(u -> email.equals(u.getEmail()) && password.equals(u.getPassword())).findFirst();
 
         if (matched.isPresent()) {
             currentUser = matched.get();
+            String sessionId = UUID.randomUUID().toString();
+            sessions.put(sessionId, currentUser);
+            Cookie cookie = new Cookie("sessionId", sessionId);
+            cookie.setMaxAge(600);
+            cookie.setHttpOnly(true);
+            setCookie(exchange, cookie);
             redirect303(exchange, "/profile");
         } else {
             redirect303(exchange, "/login");
