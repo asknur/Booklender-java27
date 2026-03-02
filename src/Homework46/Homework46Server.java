@@ -11,11 +11,13 @@ import java.io.IOException;
 import java.util.*;
 
 public class Homework46Server extends Homework45Server {
-    BookHandler bookHandler;
 
     public Homework46Server(String host, int port) throws IOException {
         super(host, port);
         registerGet("/cookie", this::cookieHandler);
+        registerGet("/logout", this::logoutHandler);
+        registerPost("/take", this::takeHandler);
+        registerPost("/return", this::returnHandler);
     }
 
     private void cookieHandler(HttpExchange exchange) {
@@ -47,4 +49,54 @@ public class Homework46Server extends Homework45Server {
         renderTemplate(exchange, "cookie.ftlh", data);
     }
 
+    private User getCurrentUser(HttpExchange exchange) {
+        String cookieRaw = getCookies(exchange);
+        Map<String, String> cookies = Cookie.parse(cookieRaw);
+        String sessionId = cookies.get("sessionId");
+        return sessions.get(sessionId);
+    }
+
+    private void takeHandler(HttpExchange exchange) {
+        User user = getCurrentUser(exchange);
+        if (user == null) {
+            redirect303(exchange, "/login");
+            return;
+        }
+        Map<String, String> params = Utils.parseUrlEncoded(getBody(exchange), "&");
+        String bookId = params.get("id");
+        if (bookId != null) {
+            BookHandler.takeBook(bookId, user.getId());
+        }
+        redirect303(exchange, "/books");
+    }
+
+    private void returnHandler(HttpExchange exchange) {
+        User user = getCurrentUser(exchange);
+        if (user == null) {
+            redirect303(exchange, "/login");
+            return;
+        }
+        Map<String, String> params = Utils.parseUrlEncoded(getBody(exchange), "&");
+        String bookId = params.get("id");
+        if (bookId != null) {
+            BookHandler.returnBook(bookId, user.getId());
+        }
+        redirect303(exchange, "/books");
+    }
+
+    private void logoutHandler(HttpExchange exchange) {
+        String cookieRaw = getCookies(exchange);
+        Map<String, String> cookies = Cookie.parse(cookieRaw);
+        String sessionId = cookies.get("sessionId");
+
+        if (cookieRaw != null){
+            cookies.remove(sessionId);
+        }
+
+        Cookie expired = new Cookie<>("sessionId", "");
+        expired.setMaxAge(0);
+        expired.setHttpOnly(true);
+        setCookie(exchange, expired);
+        redirect303(exchange, "/login");
+    }
 }
