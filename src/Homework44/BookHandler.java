@@ -95,18 +95,16 @@ public class BookHandler {
     public static boolean takeBook(String bookId, String employeeId) {
         Book book = findBookById(bookId);
         if (book == null){
-            System.out.println("There is no book");
+            return false;
         } else if (book.isTaken()) {
-            System.out.println("The book is already taken");
+            return false;
         }
-
         Employee employee = EmployeeHandler.findEmployeeById(employeeId);
         if (employee == null) {
-            System.out.println("There is no employee");;
+            return false;
         } else if (employee.getCurrentBooks().size() >= 2) {
-            System.out.println("Can't take more than 2 books");
+            return false;
         }
-
         book.setTaken(true);
         book.setIsTakenBy(employeeId);
         employee.getCurrentBooks().add(bookId);
@@ -116,16 +114,15 @@ public class BookHandler {
     public static boolean returnBook(String bookId, String employeeId) {
         Book book = findBookById(bookId);
         if (book == null){
-            System.out.println("There is no book");
+            return false;
         }
-
         Employee employee = EmployeeHandler.findEmployeeById(employeeId);
         if (employee == null) {
-            System.out.println("There is no employee");;
+            return false;
         }
+        book.setTaken(false);
+        book.setIsTakenBy(null);
 
-        book.setTaken(true);
-        book.setIsTakenBy(employeeId);
         employee.getCurrentBooks().remove(bookId);
         employee.getHistoryBooks().add(bookId);
         return true;

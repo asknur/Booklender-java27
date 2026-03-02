@@ -1,0 +1,34 @@
+Index: src/Homework45/Homework45Server.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Homework45;\n\nimport com.sun.net.httpserver.HttpExchange;\nimport lesson44.Lesson44Server;\nimport server.ContentType;\nimport server.ResponseCodes;\nimport server.RouteHandler;\nimport server.Utils;\n\nimport java.io.BufferedReader;\nimport java.io.IOException;\nimport java.io.InputStream;\nimport java.io.InputStreamReader;\nimport java.net.URLDecoder;\nimport java.nio.charset.Charset;\nimport java.nio.charset.StandardCharsets;\nimport java.nio.file.Path;\nimport java.util.*;\nimport java.util.stream.Collectors;\nimport java.util.stream.Stream;\n\npublic class Homework45Server extends Lesson44Server {\n    private User currentUser = null;\n    private Map<String, User> users = new HashMap<>();\n\n    public Homework45Server(String host, int port) throws IOException {\n        super(host, port);\n        registerGet(\"/register\", this::registerGet);\n        registerPost(\"/register\", this::registerPost);\n\n        loginGet(\"/login\", this::loginGet);\n        loginPost(\"/login\", this::loginPost);\n        profileGet(\"/profile\", this::profileGet);\n    }\n\n\n    private void registerGet(HttpExchange exchange) {\n        Path path = makeFilePath(\"register.html\");\n        sendFile(exchange, path, ContentType.TEXT_HTML);\n    }\n\n    private void registerPost(HttpExchange exchange) {\n        String raw = getBody(exchange);\n        Map<String, String> parsed = Utils.parseUrlEncoded(raw, \"&\");\n        String email = parsed.getOrDefault(\"email\", \"\").trim();\n        String fullName = parsed.getOrDefault(\"name\", \"\").trim();\n        String password = parsed.getOrDefault(\"password\", \"\").trim();\n        List<User> users = UserStorage.readUsers();\n\n        boolean exists = users.stream().anyMatch(u -> u.getEmail().equalsIgnoreCase(email));\n        String response = \"\";\n        if (fullName.isBlank() || email.isBlank() || password.isBlank()) {\n\n            response = \"\"\"\n                    <h2>Регистрация не удалась</h2>\n                    <p>Заполните все поля</p>\n                    <a href=\"/register\">Назад</a>\n                    \"\"\";\n        } else if (exists) {\n            response = \"\"\"\n                    <h2>Регистрация не удалась</h2>\n                    <p>Пользователь уже существует</p>\n                    <a href=\"/register\">Попробовать снова</a>\n                    \"\"\";\n        } else {\n            users.add(new User(fullName, email, password));\n            UserStorage.writeUsers(users);\n            redirect303(exchange, \"/login\");\n        }\n\n        try {\n            sendByteData(exchange,\n                    ResponseCodes.OK,\n                    ContentType.TEXT_HTML,\n                    response.getBytes(StandardCharsets.UTF_8));\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n    }\n\n    private void loginGet(HttpExchange exchange) {\n        Path path = makeFilePath(\"login.html\");\n        sendFile(exchange, path, ContentType.TEXT_HTML);\n    }\n\n    private void loginPost(HttpExchange exchange) {\n        Map<String, String> parsed = Utils.parseUrlEncoded(getBody(exchange), \"&\");\n        String email = parsed.getOrDefault(\"email\", \"\");\n        String password = parsed.getOrDefault(\"password\", \"\");\n\n        List<User> users = UserStorage.readUsers();\n        Optional<User> matched = users.stream().filter(u -> u.getEmail().equals(email) && u.getPassword().equals(password)).findFirst();\n\n        if (matched.isPresent()) {\n            currentUser = matched.get();\n            redirect303(exchange, \"/profile\");\n        } else {\n            redirect303(exchange, \"/login\");\n        }\n    }\n\n    private void profileGet(HttpExchange exchange) {\n        Map<String, Object> model = new HashMap<>();\n        if (currentUser != null) {\n            model.put(\"email\", currentUser.getEmail());\n            model.put(\"name\", currentUser.getName());\n        } else {\n            model.put(\"email\", \"анонимный@mail.com\");\n            model.put(\"name\", \"Некий пользователь\");\n        }\n        renderTemplate (exchange, \"profile.html\", model);\n    }\n\n\n    public static String getContentType(HttpExchange exchange) {\n        return exchange.getRequestHeaders()\n                .getOrDefault(\"Content-Type\", List.of(\"\"))\n                .get(0);\n    }\n\n    protected String getBody(HttpExchange exchange) {\n        InputStream input = exchange.getRequestBody();\n        Charset utf8 = StandardCharsets.UTF_8;\n        InputStreamReader isr = new InputStreamReader(input, utf8);\n\n        try (BufferedReader reader = new BufferedReader(isr)) {\n            return reader.lines().collect(Collectors.joining(\"\"));\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n        return \"\";\n    }\n\n    protected void redirect303(HttpExchange exchange, String path) {\n        try {\n            exchange.getResponseHeaders().add(\"Location\", path);\n            exchange.sendResponseHeaders(303, 0);\n            exchange.getResponseBody().close();\n        } catch (IOException e) {\n            e.printStackTrace();\n        }\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Homework45/Homework45Server.java b/src/Homework45/Homework45Server.java
+--- a/src/Homework45/Homework45Server.java	(revision a3cef798e5ca1611c9e787a20d1eaea74a9cfe66)
++++ b/src/Homework45/Homework45Server.java	(date 1772205439425)
+@@ -108,7 +108,7 @@
+             model.put("email", "анонимный@mail.com");
+             model.put("name", "Некий пользователь");
+         }
+-        renderTemplate (exchange, "profile.html", model);
++        renderTemplate(exchange, "profile.html", model);
+     }
+ 
+ 
+Index: src/Homework46/Homework46Server.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Homework46/Homework46Server.java b/src/Homework46/Homework46Server.java
+new file mode 100644
+--- /dev/null	(date 1772291878857)
++++ b/src/Homework46/Homework46Server.java	(date 1772291878857)
+@@ -0,0 +1,5 @@
++package Homework46;
++
++public class Homework46Server {
++
++}
