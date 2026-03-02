@@ -1,17 +1,8 @@
 [
   {
-    "name": "Askar Nurbekov",
+    "id": "1",
+    "name": "Askar",
     "email": "nurbekovaskar099@gmail.com",
-    "password": "e2323eds"
-  },
-  {
-    "name": "mike",
-    "email": "mike@mike.mike",
-    "password": "df"
-  },
-  {
-    "name": "вувуву",
-    "email": "fefef@dwdwd.com",
     "password": "12345"
   }
 ]
