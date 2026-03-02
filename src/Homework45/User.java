@@ -1,14 +1,25 @@
 package Homework45;
 
 public class User {
+    private String id;
     private String name;
     private String email;
     private String password;
+    private static int counter = 1;
 
     public User(String name, String email, String password) {
+        this.id = String.valueOf(counter++);
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
