@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 
 public class Homework45Server extends Lesson44Server {
     private User currentUser;
-    private Map<String, User> sessions = new HashMap<>();
+    protected Map<String, User> sessions = new HashMap<>();
 
     public Homework45Server(String host, int port) throws IOException {
         super(host, port);
