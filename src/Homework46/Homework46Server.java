@@ -1,9 +1,8 @@
 package Homework46;
 
 import Homework44.BookHandler;
+import Homework44.Employee;
 import Homework45.Homework45Server;
-import Homework45.User;
-import Homework45.UserStorage;
 import com.sun.net.httpserver.HttpExchange;
 import server.Utils;
 
@@ -49,7 +48,7 @@ public class Homework46Server extends Homework45Server {
         renderTemplate(exchange, "cookie.ftlh", data);
     }
 
-    private User getCurrentUser(HttpExchange exchange) {
+    private Employee getCurrentUser(HttpExchange exchange) {
         String cookieRaw = getCookies(exchange);
         Map<String, String> cookies = Cookie.parse(cookieRaw);
         String sessionId = cookies.get("sessionId");
@@ -57,7 +56,7 @@ public class Homework46Server extends Homework45Server {
     }
 
     private void takeHandler(HttpExchange exchange) {
-        User user = getCurrentUser(exchange);
+        Employee user = getCurrentUser(exchange);
         if (user == null) {
             redirect303(exchange, "/login");
             return;
@@ -71,7 +70,7 @@ public class Homework46Server extends Homework45Server {
     }
 
     private void returnHandler(HttpExchange exchange) {
-        User user = getCurrentUser(exchange);
+        Employee user = getCurrentUser(exchange);
         if (user == null) {
             redirect303(exchange, "/login");
             return;

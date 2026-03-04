@@ -3,6 +3,36 @@
     "id": "1",
     "name": "Askar",
     "email": "nurbekovaskar099@gmail.com",
+    "password": "123"
+  },
+  {
+    "id": "1",
+    "name": "mike",
+    "email": "mike@mike.mike",
     "password": "12345"
+  },
+  {
+    "id": "1",
+    "name": "Emir",
+    "email": "qwe@qwe.qwe",
+    "password": "123"
+  },
+  {
+    "id": "1",
+    "name": "Askar Nurbekov",
+    "email": "qwer@qwer.com",
+    "password": "Askar2001"
+  },
+  {
+    "id": "1",
+    "name": "mike",
+    "email": "mikeee@mikie.com",
+    "password": "1234567123451234567"
+  },
+  {
+    "id": "1",
+    "name": "Аскар",
+    "email": "nurbekovaskardeded099@gmail.com",
+    "password": "1234432432"
   }
 ]

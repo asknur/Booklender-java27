@@ -1,5 +1,6 @@
 package Homework45;
 
+import Homework44.Employee;
 import Homework46.Cookie;
 import com.sun.net.httpserver.HttpExchange;
 import lesson44.Lesson44Server;
@@ -21,8 +22,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Homework45Server extends Lesson44Server {
-    private User currentUser;
-    protected Map<String, User> sessions = new HashMap<>();
+    private Employee currentUser;
+    protected Map<String, Employee> sessions = new HashMap<>();
 
     public Homework45Server(String host, int port) throws IOException {
         super(host, port);
@@ -44,38 +45,23 @@ public class Homework45Server extends Lesson44Server {
         String raw = getBody(exchange);
         Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
         String email = parsed.getOrDefault("email", "").trim();
-        String fullName = parsed.getOrDefault("name", "").trim();
+        String name = parsed.getOrDefault("name", "").trim();
         String password = parsed.getOrDefault("password", "").trim();
-        List<User> users = UserStorage.readUsers();
+        List<Employee> users = UserStorage.readUsers();
 
+        Map<String, Object> model = new HashMap<>();
         boolean exists = users.stream().anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
-        String response = "";
-        if (fullName.isBlank() || email.isBlank() || password.isBlank()) {
-            response = """
-                    <h2>Регистрация не удалась</h2>
-                    <p>Заполните все поля</p>
-                    <a href="/register">Назад</a>
-                    """;
+
+        if (name.isBlank() || email.isBlank() || password.isBlank()) {
+            model.put("error", "Регистрация не удалась. Заполните все поля");
+            renderTemplate(exchange, "register.html", model);
         } else if (exists) {
-            response = """
-                    <h2>Регистрация не удалась</h2>
-                    <p>Пользователь уже существует</p>
-                    <a href="/register">Попробовать снова</a>
-                    """;
+            model.put("error", "Такой пользователь уже существует");
+            renderTemplate(exchange, "register.html", model);
         } else {
-            users.add(new User(fullName, email, password));
+            users.add(new Employee(name, email, password));
             UserStorage.writeUsers(users);
             redirect303(exchange, "/login");
-            return;
-        }
-
-        try {
-            sendByteData(exchange,
-                    ResponseCodes.OK,
-                    ContentType.TEXT_HTML,
-                    response.getBytes(StandardCharsets.UTF_8));
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -90,8 +76,8 @@ public class Homework45Server extends Lesson44Server {
         String email = parsed.getOrDefault("email", "").trim();
         String password = parsed.getOrDefault("password", "").trim();
 
-        List<User> users = UserStorage.readUsers();
-        Optional<User> matched = users.stream().filter(u -> email.equals(u.getEmail()) && password.equals(u.getPassword())).findFirst();
+        List<Employee> users = UserStorage.readUsers();
+        Optional<Employee> matched = users.stream().filter(u -> email.equals(u.getEmail()) && password.equals(u.getPassword())).findFirst();
 
         if (matched.isPresent()) {
             currentUser = matched.get();
@@ -103,6 +89,9 @@ public class Homework45Server extends Lesson44Server {
             setCookie(exchange, cookie);
             redirect303(exchange, "/profile");
         } else {
+            Cookie cookie = new Cookie("sessionId", "");
+            cookie.setMaxAge(0);
+            setCookie(exchange, cookie);
             redirect303(exchange, "/login");
         }
     }

@@ -1,5 +1,6 @@
 package Homework45;
 
+import Homework44.Employee;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -11,11 +12,11 @@ public class UserStorage {
     private static final Path PATH = Paths.get("data/employees.json");
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    public static List<User> readUsers() {
+    public static List<Employee> readUsers() {
         try {
             if (Files.notExists(PATH)) return new ArrayList<>();
             String json = Files.readString(PATH);
-            User[] arr = GSON.fromJson(json, User[].class);
+            Employee[] arr = GSON.fromJson(json, Employee[].class);
             return new ArrayList<>(Arrays.asList(arr));
         } catch (IOException e) {
             e.printStackTrace();
@@ -23,9 +24,9 @@ public class UserStorage {
         }
     }
 
-    public static void writeUsers(List<User> users) {
+    public static void writeUsers(List<Employee> employees) {
         try {
-            String json = GSON.toJson(users);
+            String json = GSON.toJson(employees);
             Files.write(PATH, json.getBytes());
         } catch (IOException e) {
             e.printStackTrace();

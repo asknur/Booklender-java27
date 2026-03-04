@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8746009-59ef-4735-9307-f3be43419536" name="Changes" comment="changed session incapsulation to protected from private" />
+    <list default="true" id="e8746009-59ef-4735-9307-f3be43419536" name="Changes" comment="changed session incapsulation to protected from private">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/employees.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/employees.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/data/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/data/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booklender-java27/Homework44/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booklender-java27/Homework44/Employee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booklender-java27/Homework45/Homework45Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booklender-java27/Homework45/Homework45Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booklender-java27/Homework45/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booklender-java27/Homework45/UserStorage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booklender-java27/Homework45/UserStorage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Booklender-java27/Homework46/Homework46Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booklender-java27/Homework46/Homework46Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Homework44/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework44/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Homework45/Homework45Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework45/Homework45Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Homework45/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Homework45/UserStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework45/UserStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Homework46/Homework46Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework46/Homework46Server.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +41,7 @@
     <option name="RECENT_COMMON_BRANCH" value="main" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -462,6 +478,25 @@
     <option name="LAST_COMMIT_MESSAGE" value="changed session incapsulation to protected from private" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Homework45/Homework45Server.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Homework45/Homework45Server.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Homework45/Homework45Server.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="exchange" />
