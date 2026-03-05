@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8746009-59ef-4735-9307-f3be43419536" name="Changes" comment="Some file">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/employees.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/employees.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/data/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booklender-java27/Homework44/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booklender-java27/Homework44/Employee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Homework44/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework44/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Homework46/Homework46Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework46/Homework46Server.java" afterDir="false" />
+    <list default="true" id="e8746009-59ef-4735-9307-f3be43419536" name="Changes" comment="file">
+      <change beforePath="$PROJECT_DIR$/src/Homework44/BookHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework44/BookHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Homework44/EmployeeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework44/EmployeeHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,38 +81,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1771666933906</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Changed server">
-      <option name="closed" value="true" />
-      <created>1772029134290</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1772029134290</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Created ftl file for profile">
-      <option name="closed" value="true" />
-      <created>1772029160209</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1772029160209</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Created ftl file for registration">
-      <option name="closed" value="true" />
-      <created>1772029171084</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1772029171084</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Added util methods from lesson 45">
-      <option name="closed" value="true" />
-      <created>1772029196734</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1772029196734</updated>
     </task>
     <task id="LOCAL-00017" summary="Added post methods">
       <option name="closed" value="true" />
@@ -478,12 +442,42 @@
       <option name="project" value="LOCAL" />
       <updated>1772705345493</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Fixes id">
+      <option name="closed" value="true" />
+      <created>1772708634344</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1772708634344</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Fixes">
+      <option name="closed" value="true" />
+      <created>1772708644717</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1772708644717</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Fixes">
+      <option name="closed" value="true" />
+      <created>1772708651638</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1772708651638</updated>
+    </task>
+    <task id="LOCAL-00065" summary="file">
+      <option name="closed" value="true" />
+      <created>1772708656765</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1772708656765</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Upgraded login methods for cookies with creating unique id for users and set max age, httponly" />
-    <MESSAGE value="Added new method for gettin employee by Id and fixed old methods" />
     <MESSAGE value="Added Cookie class file fron lesson 46" />
     <MESSAGE value="Added Cookie ftlh file fron lesson 46" />
     <MESSAGE value="Fixed to method books for better work with book list and created new methods for finding, taking and returning books" />
@@ -500,14 +494,16 @@
     <MESSAGE value="added check for empty space" />
     <MESSAGE value="deleted" />
     <MESSAGE value="Fixed user to employee" />
-    <MESSAGE value="file" />
     <MESSAGE value="Added more good style" />
     <MESSAGE value="Upgraded profileGet" />
     <MESSAGE value="Changed to sessions" />
     <MESSAGE value="user-password" />
     <MESSAGE value="changed to employee" />
     <MESSAGE value="Some file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some file" />
+    <MESSAGE value="Fixes id" />
+    <MESSAGE value="Fixes" />
+    <MESSAGE value="file" />
+    <option name="LAST_COMMIT_MESSAGE" value="file" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

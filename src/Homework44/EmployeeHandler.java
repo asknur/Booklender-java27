@@ -1,5 +1,7 @@
 package Homework44;
 
+import Homework45.UserStorage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,11 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class EmployeeHandler {
-    private static List<Employee> employees = new ArrayList<>(List.of(
-            new Employee("emp1", "Steve",
-                    new ArrayList<>(List.of("1", "2")),
-                    new ArrayList<>(List.of("3")))
-    ));
+    private static List<Employee> employees = UserStorage.readUsers();
 
     public static Employee findEmployeeById(String id) {
         for (Employee emp : employees) {
