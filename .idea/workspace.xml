@@ -4,20 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8746009-59ef-4735-9307-f3be43419536" name="Changes" comment="changed session incapsulation to protected from private">
+    <list default="true" id="e8746009-59ef-4735-9307-f3be43419536" name="Changes" comment="file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/employees.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/employees.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/book.html" beforeDir="false" afterPath="$PROJECT_DIR$/data/book.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/data/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/data/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booklender-java27/Homework44/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booklender-java27/Homework44/Employee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/data/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Booklender-java27/Homework45/Homework45Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booklender-java27/Homework45/Homework45Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booklender-java27/Homework45/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booklender-java27/Homework45/UserStorage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booklender-java27/Homework45/UserStorage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Booklender-java27/Homework46/Homework46Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Booklender-java27/Homework46/Homework46Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Homework44/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework44/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Homework44/EmployeeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework44/EmployeeHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Homework45/Homework45Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework45/Homework45Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Homework45/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Homework45/UserStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework45/UserStorage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Homework46/Homework46Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Homework46/Homework46Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +33,7 @@
         <entry key="$PROJECT_DIR$" value="Homework44" />
       </map>
     </option>
-    <option name="RECENT_COMMON_BRANCH" value="main" />
+    <option name="RECENT_COMMON_BRANCH" value="Homework46" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
     <option name="UPDATE_TYPE" value="REBASE" />
@@ -68,7 +63,7 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Homework46",
+    "git-widget-placeholder": "Homework47",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/askar/Desktop/Java 27/Booklender-java27/data",
     "project.structure.last.edited": "Modules",
@@ -93,46 +88,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1771666933906</updated>
-    </task>
-    <task id="LOCAL-00001" summary="Added file from lesson 44">
-      <option name="closed" value="true" />
-      <created>1771667046562</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1771667046562</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Created data models for books asn employees">
-      <option name="closed" value="true" />
-      <created>1771667277705</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1771667277706</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Changed direction">
-      <option name="closed" value="true" />
-      <created>1771837544588</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1771837544589</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Changed direction and added new endpoints">
-      <option name="closed" value="true" />
-      <created>1771837582632</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1771837582632</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Created models for book and employee">
-      <option name="closed" value="true" />
-      <created>1771837609956</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1771837609956</updated>
     </task>
     <task id="LOCAL-00006" summary="Created handler for book">
       <option name="closed" value="true" />
@@ -446,19 +401,90 @@
       <option name="project" value="LOCAL" />
       <updated>1772449482491</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Added new constructor for json and created new fields">
+      <option name="closed" value="true" />
+      <created>1772636455104</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1772636455104</updated>
+    </task>
+    <task id="LOCAL-00046" summary="fixed register post for empty spaces and fixed login post to clear cookie login is false">
+      <option name="closed" value="true" />
+      <created>1772636600833</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1772636600833</updated>
+    </task>
+    <task id="LOCAL-00047" summary="maked new registrations">
+      <option name="closed" value="true" />
+      <created>1772636617510</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1772636617510</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Changed user to employee">
+      <option name="closed" value="true" />
+      <created>1772636637632</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1772636637632</updated>
+    </task>
+    <task id="LOCAL-00049" summary="fixed password">
+      <option name="closed" value="true" />
+      <created>1772636654150</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1772636654150</updated>
+    </task>
+    <task id="LOCAL-00050" summary="added check for empty space">
+      <option name="closed" value="true" />
+      <created>1772636759902</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1772636759903</updated>
+    </task>
+    <task id="LOCAL-00051" summary="deleted">
+      <option name="closed" value="true" />
+      <created>1772636773891</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1772636773891</updated>
+    </task>
+    <task id="LOCAL-00052" summary="deleted">
+      <option name="closed" value="true" />
+      <created>1772636777531</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1772636777531</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Fixed user to employee">
+      <option name="closed" value="true" />
+      <created>1772636819581</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1772636819581</updated>
+    </task>
+    <task id="LOCAL-00054" summary="file">
+      <option name="closed" value="true" />
+      <created>1772636830709</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1772636830709</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Some files" />
-    <MESSAGE value="Added and fixed ftl files" />
-    <MESSAGE value="Created User model" />
-    <MESSAGE value="Remaked register post and login post methods" />
-    <MESSAGE value="Created users reading and writing class for gson" />
-    <MESSAGE value="fix" />
-    <MESSAGE value="Check for null" />
-    <MESSAGE value="Changed profileGet and created new file server for homework 46" />
-    <MESSAGE value="Created getter and setter for cookies" />
     <MESSAGE value="Tested new registration" />
     <MESSAGE value="Fixed password name" />
     <MESSAGE value="Changed server name" />
@@ -475,28 +501,18 @@
     <MESSAGE value="Created new field id" />
     <MESSAGE value="Created handlers for taking, return and logout" />
     <MESSAGE value="changed session incapsulation to protected from private" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed session incapsulation to protected from private" />
+    <MESSAGE value="Added new constructor for json and created new fields" />
+    <MESSAGE value="fixed register post for empty spaces and fixed login post to clear cookie login is false" />
+    <MESSAGE value="maked new registrations" />
+    <MESSAGE value="Changed user to employee" />
+    <MESSAGE value="fixed password" />
+    <MESSAGE value="added check for empty space" />
+    <MESSAGE value="deleted" />
+    <MESSAGE value="Fixed user to employee" />
+    <MESSAGE value="file" />
+    <option name="LAST_COMMIT_MESSAGE" value="file" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Homework45/Homework45Server.java</url>
-          <line>75</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Homework45/Homework45Server.java</url>
-          <line>76</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Homework45/Homework45Server.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="exchange" />
