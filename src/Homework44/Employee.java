@@ -1,6 +1,6 @@
 package Homework44;
-
 import java.util.List;
+import java.util.UUID;
 
 public class Employee {
     private String id;
@@ -9,7 +9,6 @@ public class Employee {
     private String password;
     private List<String> currentBooks;
     private List<String> historyBooks;
-    private static int counter = 1;
 
     public Employee(String id, String name, List<String> currentBooks, List<String> historyBooks) {
         this.id = id;
@@ -19,7 +18,7 @@ public class Employee {
     }
 
     public Employee(String name, String email, String password) {
-        this.id = String.valueOf(counter++);
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.email = email;
         this.password = password;
