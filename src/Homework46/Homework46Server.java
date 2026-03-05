@@ -89,7 +89,7 @@ public class Homework46Server extends Homework45Server {
         String sessionId = cookies.get("sessionId");
 
         if (cookieRaw != null){
-            sessions.remove(sessionId);
+            cookies.remove(sessionId);
         }
 
         Cookie expired = new Cookie<>("sessionId", "");
