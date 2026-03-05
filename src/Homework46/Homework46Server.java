@@ -56,31 +56,41 @@ public class Homework46Server extends Homework45Server {
     }
 
     private void takeHandler(HttpExchange exchange) {
-        Employee user = getCurrentUser(exchange);
-        if (user == null) {
-            redirect303(exchange, "/login");
-            return;
+        try {
+            Employee user = getCurrentUser(exchange);
+            if (user == null) {
+                redirect303(exchange, "/login");
+                return;
+            }
+            Map<String, String> params = Utils.parseUrlEncoded(getBody(exchange), "&");
+            String bookId = params.get("id");
+            if (bookId != null) {
+                BookHandler.takeBook(bookId, user.getId());
+            }
+            redirect303(exchange, "/books");
+        } catch (Exception e) {
+            e.printStackTrace();
+            redirect303(exchange, "/books");
         }
-        Map<String, String> params = Utils.parseUrlEncoded(getBody(exchange), "&");
-        String bookId = params.get("id");
-        if (bookId != null) {
-            BookHandler.takeBook(bookId, user.getId());
-        }
-        redirect303(exchange, "/books");
     }
 
     private void returnHandler(HttpExchange exchange) {
-        Employee user = getCurrentUser(exchange);
-        if (user == null) {
-            redirect303(exchange, "/login");
-            return;
+        try {
+            Employee user = getCurrentUser(exchange);
+            if (user == null) {
+                redirect303(exchange, "/login");
+                return;
+            }
+            Map<String, String> params = Utils.parseUrlEncoded(getBody(exchange), "&");
+            String bookId = params.get("id");
+            if (bookId != null) {
+                BookHandler.returnBook(bookId, user.getId());
+            }
+            redirect303(exchange, "/books");
+        } catch (Exception e) {
+            e.printStackTrace();
+            redirect303(exchange, "/books");
         }
-        Map<String, String> params = Utils.parseUrlEncoded(getBody(exchange), "&");
-        String bookId = params.get("id");
-        if (bookId != null) {
-            BookHandler.returnBook(bookId, user.getId());
-        }
-        redirect303(exchange, "/books");
     }
 
     private void logoutHandler(HttpExchange exchange) {
@@ -88,8 +98,8 @@ public class Homework46Server extends Homework45Server {
         Map<String, String> cookies = Cookie.parse(cookieRaw);
         String sessionId = cookies.get("sessionId");
 
-        if (cookieRaw != null){
-            cookies.remove(sessionId);
+        if (sessionId != null){
+            sessions.remove(sessionId);
         }
 
         Cookie expired = new Cookie<>("sessionId", "");
