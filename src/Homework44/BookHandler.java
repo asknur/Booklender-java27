@@ -94,15 +94,21 @@ public class BookHandler {
 
     public static boolean takeBook(String bookId, String employeeId) {
         Book book = findBookById(bookId);
-        if (book == null){
-            return false;
-        } else if (book.isTaken()) {
+        if (book == null || book.isTaken()) {
             return false;
         }
         Employee employee = EmployeeHandler.findEmployeeById(employeeId);
         if (employee == null) {
             return false;
-        } else if (employee.getCurrentBooks().size() >= 2) {
+        }
+
+        if (employee.getCurrentBooks() == null) {
+            employee.setCurrentBooks(new ArrayList<>());
+        }
+        if (employee.getHistoryBooks() == null) {
+            employee.setHistoryBooks(new ArrayList<>());
+        }
+        if (employee.getCurrentBooks().size() >= 2) {
             return false;
         }
         book.setTaken(true);
