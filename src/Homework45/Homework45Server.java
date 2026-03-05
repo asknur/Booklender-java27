@@ -5,21 +5,17 @@ import Homework46.Cookie;
 import com.sun.net.httpserver.HttpExchange;
 import lesson44.Lesson44Server;
 import server.ContentType;
-import server.ResponseCodes;
-import server.RouteHandler;
 import server.Utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Homework45Server extends Lesson44Server {
     private Employee currentUser;
@@ -74,7 +70,7 @@ public class Homework45Server extends Lesson44Server {
         String raw = getBody(exchange);
         Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
         String email = parsed.getOrDefault("email", "").trim();
-        String password = parsed.getOrDefault("password", "").trim();
+        String password = parsed.getOrDefault("user-password", "").trim();
 
         List<Employee> users = UserStorage.readUsers();
         Optional<Employee> matched = users.stream().filter(u -> email.equals(u.getEmail()) && password.equals(u.getPassword())).findFirst();
@@ -98,14 +94,16 @@ public class Homework45Server extends Lesson44Server {
 
     private void profileGet(HttpExchange exchange) {
         Map<String, Object> model = new HashMap<>();
-        if (currentUser != null) {
-            model.put("email", currentUser.getEmail());
-            model.put("name", currentUser.getName());
-        } else {
-            model.put("email", "анонимный@mail.com");
-            model.put("name", "Некий пользователь");
+        String cookieHeader = exchange.getRequestHeaders().getFirst("Cookie");
+        if (cookieHeader != null && cookieHeader.contains("sessionId=")) {
+            String sessionId = cookieHeader.replace("sessionId=", "").split(";")[0];
+            Employee user = sessions.get(sessionId);
+
+            if (user != null) {
+                model.put("employee", user);
+                renderTemplate(exchange, "profile.html", model);
+            }
         }
-        renderTemplate (exchange, "profile.html", model);
     }
 
 
