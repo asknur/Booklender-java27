@@ -6,33 +6,15 @@
     "password": "123"
   },
   {
-    "id": "1",
+    "id": "245eb6de-0e4e-4535-95cb-8661e47cfd3d",
     "name": "mike",
     "email": "mike@mike.mike",
-    "password": "12345"
-  },
-  {
-    "id": "1",
-    "name": "Emir",
-    "email": "qwe@qwe.qwe",
     "password": "123"
   },
   {
-    "id": "1",
-    "name": "Askar Nurbekov",
-    "email": "qwer@qwer.com",
-    "password": "Askar2001"
-  },
-  {
-    "id": "1",
-    "name": "mike",
-    "email": "mikeee@mikie.com",
-    "password": "1234567123451234567"
-  },
-  {
-    "id": "1",
-    "name": "Аскар",
-    "email": "nurbekovaskardeded099@gmail.com",
-    "password": "1234432432"
+    "id": "0bd790d0-744e-415c-9648-a0d8412d9695",
+    "name": "Emir",
+    "email": "emir@emir.emir",
+    "password": "123"
   }
 ]

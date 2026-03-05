@@ -8,7 +8,7 @@ import java.util.Map;
 public class BookHandler {
 
     public static List<Book> books = new ArrayList<>(List.of(
-            new Book("1", "Белый пароход", "Чингиз Айтматов", true, "emp1",
+            new Book("1", "Белый пароход", "Чингиз Айтматов", false, null,
                         "Повесть о мальчике и его деде-оленеводе, живущих на берегу озера Иссык-Куль.",
                         "https://ru-images.kinorium.com/movie/1080/141525.jpg?1627126817"),
 
@@ -24,7 +24,7 @@ public class BookHandler {
                         "Эпический роман о русском обществе во время войны с Наполеоном.",
                         "https://m.media-amazon.com/images/I/912F83swwRL._UF1000,1000_QL80_.jpg"),
 
-                new Book("5", "Преступление и наказание", "Фёдор Достоевский", true, "emp2",
+                new Book("5", "Преступление и наказание", "Фёдор Достоевский", false, null,
                         "Психологический роман о студенте Раскольникове, совершившем убийство.",
                         "https://s5-goods.ozstatic.by/1000/719/294/101/101294719_0.jpg"),
 
@@ -32,7 +32,7 @@ public class BookHandler {
                         "Антиутопия о тоталитарном обществе под постоянным наблюдением.",
                         "https://cdn.respublica.ru/uploads/01/00/00/1l/jn/large_webp_2236d1e62beb731e.webp?1387650624"),
 
-                new Book("7", "Мастер и Маргарита", "Михаил Булгаков", true, "emp3",
+                new Book("7", "Мастер и Маргарита", "Михаил Булгаков", false, null,
                         "Мистический роман о визите дьявола в Москву 1930-х годов.",
                         "https://www.moscowbooks.ru/image/book/708/orig/i708783.jpg?cu=20201216154536"),
 
@@ -44,7 +44,7 @@ public class BookHandler {
                         "История трагической любви замужней женщины к офицеру Вронскому.",
                         "https://cdn.azbooka.ru/cv/w1100/f85b70c8-f0e4-4104-bd2e-b3de263793d8.jpg"),
 
-                new Book("10", "Идиот", "Фёдор Достоевский", true, "emp4",
+                new Book("10", "Идиот", "Фёдор Достоевский", false, null,
                         "Роман о князе Мышкине, пытающемся привнести добро в жестокий мир.",
                         "https://cdn.azbooka.ru/cv/w1100/ac3a9217-8087-425e-ae59-cb062edb21a2.jpg"),
 
@@ -52,7 +52,7 @@ public class BookHandler {
                         "История о человеке, чей портрет стареет вместо него.",
                         "https://content1.rozetka.com.ua/goods/images/big/428987371.jpg"),
 
-                new Book("12", "Три товарища", "Эрих Мария Ремарк", true, "emp5",
+                new Book("12", "Три товарища", "Эрих Мария Ремарк", false, null,
                         "Роман о дружбе и любви в послевоенной Германии.",
                         "https://cdn.скидкагид.рф/images/prodacts/sourse/61697/61697333_tri-tovarischa-ast.jpg"),
 
@@ -94,15 +94,21 @@ public class BookHandler {
 
     public static boolean takeBook(String bookId, String employeeId) {
         Book book = findBookById(bookId);
-        if (book == null){
-            return false;
-        } else if (book.isTaken()) {
+        if (book == null || book.isTaken()) {
             return false;
         }
         Employee employee = EmployeeHandler.findEmployeeById(employeeId);
         if (employee == null) {
             return false;
-        } else if (employee.getCurrentBooks().size() >= 2) {
+        }
+
+        if (employee.getCurrentBooks() == null) {
+            employee.setCurrentBooks(new ArrayList<>());
+        }
+        if (employee.getHistoryBooks() == null) {
+            employee.setHistoryBooks(new ArrayList<>());
+        }
+        if (employee.getCurrentBooks().size() >= 2) {
             return false;
         }
         book.setTaken(true);
